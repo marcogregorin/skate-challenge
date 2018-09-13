@@ -13,25 +13,22 @@ gulp.task('default', function(){
 gulp.task('styles', function(){
   return gulp.src('./assets/scss/main.scss')
     .pipe(autoprefixer())
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist/css')
   );
 });
 // MINIFY STYLES
 gulp.task('minify', function(){
   return gulp.src('./dist/css/main.css')
-    .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(rename({suffix: ".min"}) )
     .pipe(gulp.dest('./dist/css')
   );
 });
 
-// SET UP WATCH
+// SET UP WATCHES
 gulp.task('watch', function(){
+  gulp.watch('./assets/scss/**/*.scss', ['styles']);
+  gulp.watch('./dist/css/main.css', ['minify']);
 
-  watch('./assets/scss/*.scss', function(){
-    gulp.start('styles');
-    gulp.start('minify');
-  });
-
-});
+})
