@@ -12,8 +12,11 @@ gulp.task('default', function(){
 // SASS IT
 gulp.task('styles', function(){
   return gulp.src('./assets/scss/main.scss')
-    .pipe(autoprefixer())
     .pipe(sass().on('error', sass.logError))
+    .pipe(autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
     .pipe(gulp.dest('./dist/css')
   );
 });

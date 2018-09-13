@@ -1,3 +1,14 @@
-/*@import "include/bootstrap";*/
-@import "include/variables";
-@import "include/general";
+/*
+
+This MAIN.SCSS includes all the STYLES
+Structure:
+main.scss
+- - base       // all the generic base styles
+- - modules    // styles for parts of the app
+
+*/
+
+//IMPORT BASE
+@import "base/_bootstrap";
+@import "base/_variables";
+@import "base/_general";
