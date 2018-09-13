@@ -10,7 +10,7 @@ gulp.task('default', function(){
 
 // SASS IT
 gulp.task('styles', function(){
-  return gulp.src('./assets/sass/main.scss')
+  return gulp.src('./assets/scss/main.scss')
     .pipe(autoprefixer())
     .pipe(sass({outputStyle: 'compressed'}))
     .pipe(gulp.dest('./dist/css')
@@ -20,7 +20,7 @@ gulp.task('styles', function(){
 // SET UP WATCH
 gulp.task('watch', function(){
 
-  watch('./assets/sass/**/*.scss', function(){
+  watch('./assets/scss/*.scss', function(){
     gulp.start('styles');
   });
 
