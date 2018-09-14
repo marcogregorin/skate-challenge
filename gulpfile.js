@@ -3,6 +3,7 @@ var watch = require('gulp-watch');
 var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var rename = require('gulp-rename');
+var browserSync = require('browser-sync');
 
 // CREATE A DEFAULT TASK
 gulp.task('default', function(){
@@ -20,6 +21,7 @@ gulp.task('styles', function(){
     .pipe(gulp.dest('./dist/css')
   );
 });
+
 // MINIFY STYLES
 gulp.task('minify', function(){
   return gulp.src('./dist/css/main.css')
@@ -31,7 +33,27 @@ gulp.task('minify', function(){
 
 // SET UP WATCHES
 gulp.task('watch', function(){
-  gulp.watch('./assets/scss/**/*.scss', ['styles']);
-  gulp.watch('./dist/css/main.css', ['minify']);
+
+  // INITIALIZE BROWSER
+  browserSync.init({
+    server: {
+      baseDir: '.'
+    }
+  })
+
+  // REFRESH BROWSER WHEN INDEX.HTML CHANGES
+  watch('index.html', function(){
+    browserSync.reload();
+  });
+
+  // RUN STYLES & MINIFY
+  gulp.watch('./assets/scss/**/*.scss', ['styles']);    // Call Styles Task
+  gulp.watch('./dist/css/main.css', ['cssInject']);     // Call cssInject where has 'Minify' task as a dependency
 
 })
+
+//
+gulp.task('cssInject', ['minify'], function() {
+  return gulp.src('./dist/css/main.min.css')
+    .pipe(browserSync.stream());
+});
