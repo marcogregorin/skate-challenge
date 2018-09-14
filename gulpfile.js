@@ -36,6 +36,7 @@ gulp.task('watch', function(){
 
   // INITIALIZE BROWSER
   browserSync.init({
+    notify: false,
     server: {
       baseDir: '.'
     }
@@ -52,7 +53,7 @@ gulp.task('watch', function(){
 
 })
 
-//
+// CSSINJECT - Refresh when css changes. It won't start untill Minify has ran
 gulp.task('cssInject', ['minify'], function() {
   return gulp.src('./dist/css/main.min.css')
     .pipe(browserSync.stream());
