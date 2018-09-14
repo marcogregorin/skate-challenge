@@ -13,6 +13,10 @@ gulp.task('styles', function(){
       browsers: ['last 2 versions'],
       cascade: false
     }))
+    .on('errror', function(errorInfo){
+      console.log(errorInfo.toString());
+      this.emit('end');
+    })
     .pipe(gulp.dest('./dist/css')
   );
 });
