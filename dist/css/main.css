@@ -2,7 +2,8 @@
 
 This MAIN.SCSS includes all the STYLES
 Structure:
-main.scss
+
+- main.scss
 - - base       // all the generic base styles
 - - modules    // styles for parts of the app
 
@@ -2806,7 +2807,7 @@ input[type="button"].btn-block {
     border-color: #1b1e21; }
 
 body {
-  background: #20232D;
+  background: #353434;
   margin: 0;
   padding: 0; }
 
